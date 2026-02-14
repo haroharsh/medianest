@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediaNest Dashboard</title>
+
+<style>
+
+/* Reset */
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background:#f4f6fb;
+}
+
+/* Layout */
+.layout{
+    display:flex;
+}
+
+/* Sidebar */
+.side-bar{
+    width:220px;
+    height:100vh;
+    background:#ffffff;
+    box-shadow:2px 0 10px rgba(0,0,0,0.1);
+    padding:20px;
+}
+
+.side-bar h2{
+    font-size:38px;
+    margin-bottom:30px;
+}
+
+.side-bar a{
+    display:block;
+    text-decoration:none;
+    margin:12px 0;
+    color:#333;
+    font-weight:500;
+}
+
+.side-bar a:hover{
+    color:#6a5cff;
+}
+
+
+.right{
+    flex:1;
+}
+
+.top-bar{
+    height:70px;
+    background:white;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.content{
+    padding:30px;
+}
+
+.cards{
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+/* Make card clickable */
+.card-link{
+    text-decoration:none;
+}
+
+/* Common card style */
+.media-card{
+    width:260px;
+    padding:25px;
+    border-radius:20px;
+    color:white;
+    box-shadow:0 12px 25px rgba(0,0,0,0.15);
+    transition:0.3s;
+}
+
+.media-card:hover{
+    transform:translateY(-5px);
+}
+
+/* Card image */
+.media-card img{
+    width:80px;
+    border-radius:15px;
+}
+
+.media-card h2{
+    margin:15px 0 5px;
+}
+
+.media-card p{
+    margin:5px 0;
+}
+
+.instagram{
+    background:linear-gradient(145deg,#ff4ecd,#6a5cff);
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <div class="side-bar">
+        <h2>MediaNest</h2>
+
+        <a href="#">Dashboard</a>
+        <a href="https://www.instagram.com" target="_blank">Instagram</a>
+        <a href="https://www.facebook.com" target="_blank">Facebook</a>
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+        <a href="https://music.youtube.com" target="_blank">YT Music</a>
+    </div>
+
+    <div class="right">
+
+        <div class="top-bar"></div>
+
+        <div class="content">
+
+            <div class="cards">
+
+                <a href="https://www.instagram.com" target="_blank" class="card-link">
+                    <div class="media-card instagram">
+                        <h3>Instagram Post</h3>
+                        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png">
+                        <h2>Instagram Saver</h2>
+                        <p>Save reels, posts and videos</p>
+                        <p>Saved</p>
+                    </div>
+                </a>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

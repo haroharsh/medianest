@@ -1,39 +1,40 @@
 <?php
 session_start();
-include("includes/config.php");
 
-$message = "";
-
-if(isset($_POST['login'])) {
-
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = $_POST['password'];
-
-    $query = "SELECT * FROM users WHERE email='$email'";
-    $result = mysqli_query($conn, $query);
-
-    if(mysqli_num_rows($result) > 0) {
-
-        $user = mysqli_fetch_assoc($result);
-
-        if(password_verify($password, $user['password'])) {
-
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-
-            header("Location: pages/dashboard.php");
-            exit();
-
-        } else {
-            $message = "Wrong password!";
-        }
-
-    } else {
-        $message = "User not found!";
-    }
+if(!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
 }
 ?>
 
+<?php
+include("includes/config.php");
+
+if(isset($_POST['register'])) {
+
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $check = "SELECT * FROM users WHERE email='$email'";
+    $result = mysqli_query($conn, $check);
+
+    if(mysqli_num_rows($result) > 0) {
+        $message = "Email already exists!";
+
+    } else {
+        $query = "INSERT INTO users (username, email, password)
+                  VALUES ('$username', '$email', '$password')";
+
+        if(mysqli_query($conn, $query)) {
+            header("Location: index.php");
+            exit();
+
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +63,7 @@ if(isset($_POST['login'])) {
             
             
         }
-
+        
         .logincard {
             width: 350px;
             background-color: rgba(255, 255, 255, 0.25);
@@ -130,6 +131,12 @@ if(isset($_POST['login'])) {
     box-shadow: 0 15px 35px rgba(0,0,0,0.3);
 }
 
+.message {
+    color: #f2db2d;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 .logincard button:hover {
     background: #f2db2d;
     color: black;
@@ -154,21 +161,21 @@ if(isset($_POST['login'])) {
 
     <div class="container">
         <div class="logincard">
-    <h1>MediaNest</h1>
-    <p>Login to your account</p>
-
-    <?php if(!empty($message)) { ?>
-        <p style="color: yellow;"><?php echo $message; ?></p>
+            <h1>MediaNest</h1>
+            <p>Register your account</p>
+            <?php if(!empty($message)) { ?>
+        <p style="color: yellow; font-weight: bold;">
+            <?php echo $message; ?>
+        </p>
     <?php } ?>
-
-    <form method="POST" action="">
-        <input type="email" name="email" placeholder="Enter Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit" name="login">Login</button>
-    </form>
-
-    <div class="signup">
-        Don’t have an account? <a href="register.php">Sign up</a>
+            <form method="POST" action="">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit" name="register">Sign Up</button>
+</form>
+        </div>
+        <a href="./pages/dashboard.php">Hello</a>
     </div>
 
 </body>

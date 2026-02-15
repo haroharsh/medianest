@@ -10,7 +10,7 @@
             height: 100%;
             margin: 0;
             font-family: Arial, sans-serif;
-            background-image: url("Knight_Image.png");
+            background-image: url("https://res.cloudinary.com/dqbbuncyr/image/upload/v1771136046/Knight_Image_uq8uie.png");
             background-size: cover;
             background-position: center;
             
